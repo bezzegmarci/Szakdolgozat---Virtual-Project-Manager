@@ -1,0 +1,11 @@
+select {
+    background-color:blue;
+    font-size: 14px;
+    color:antiquewhite;
+    font-weight: bold;
+    text-align: center;
+    font-family: cursive;
+    border-radius: 12px;
+    border-color:darkblue;
+    border-width: 5px;
+}

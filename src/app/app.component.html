@@ -1,0 +1,13 @@
+<app-menu (selectedPage)="changePage($event)"></app-menu>
+<ng-template [ngIf]="page === 'main'">
+  <div class="main_component">
+    <app-main></app-main>
+  </div>
+</ng-template>
+<ng-template [ngIf]="page === 'contact'">
+  <div class="contact_component">
+    <app-contact></app-contact>
+  </div>
+</ng-template>
+
+<!-- <router-outlet></router-outlet> -->
