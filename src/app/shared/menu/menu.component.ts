@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +7,11 @@ import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular
 })
 export class MenuComponent implements OnInit, AfterViewInit {
 
+  @Input() currentPage: string = '';
+  @Input() loggedInUser?: firebase.default.User | null;
   @Output() selectedPage: EventEmitter<string> = new EventEmitter();
+  @Output() onCloseSidenav: EventEmitter<boolean> = new EventEmitter;
+  @Output() onLogout: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {
   }
@@ -18,8 +22,14 @@ export class MenuComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  menuSwitch(pageValue: string) {
-    this.selectedPage.emit(pageValue);
+  menuSwitch() {
+    this.selectedPage.emit(this.currentPage);
   }
 
+  close(logout?: boolean) {
+    this.onCloseSidenav.emit(true);
+    if(logout === true){
+      this.onLogout.emit(logout);
+    }
+  }
 }

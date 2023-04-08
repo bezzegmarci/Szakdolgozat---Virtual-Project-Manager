@@ -1,7 +1,69 @@
-div {
+mat-card {
+    padding-top: 26px;
+    padding-bottom: 26px;
+    border-radius: 10px;
+    background-color: #020C18;
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(8px 8px 10px darkblue);
+}
+
+footer {
+    background-color: lightblue;
+    height: 500px;
+    text-align: center;
+}
+
+.nostyle {
+    background-color: lightblue;
+    border: none;
+}
+
+mat-card-header{
+    display: initial;
+}
+
+mat-card-content{
+    display: initial;
+}
+
+.div-flex{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     height: 100%;
+}
+
+p {
+    font-size: 18px;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: lightblue;
+    color: black;
+    margin: auto;
+    align-self: center;
+    width: 380px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 20px;
+    border: solid 2px;
+    border-color: darkblue;
+    border-radius: 10px;
+}
+
+.logo {
+    margin: auto;
+    display: block;
+    width: 150px;
+}
+
+html, body { 
+    height: 100%; 
+    background-color: lightblue;
 }

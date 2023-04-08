@@ -1,0 +1,283 @@
+
+table {
+    justify-content: center;
+    text-align: left;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+}
+
+.registrationForm {
+    border: 2px solid;
+    border-radius: 4px;
+    border-color: darkblue;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: lightseagreen;
+}
+
+td {
+    padding-left: 20px;
+}
+
+.nopadding {
+    padding-left: 0px;
+}
+
+header {
+    background-color: lightblue;
+    height: 82px;
+    border: medium solid darkblue;
+}
+
+
+section {
+    width: 80%;
+    float: left;
+    background-color: #020C18;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-right: auto;
+    margin-left: auto;
+    height: inherit;
+    text-align: center;
+    color: white;
+}
+
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active {
+    color: #262C7B;
+}
+
+.navigation-items {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    list-style: none;
+    padding: 10px;
+    flex-direction: row; 
+    box-sizing: border-box; 
+    display: flex;
+}
+
+li {
+    display: inline;
+}
+
+#menu {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+ul {
+    border-bottom: 4px solid;
+    border-color: darkblue;
+}
+
+body {
+    background-color: lightblue;
+    display : flex;
+    flex-direction : row;
+    height: 100%;
+    
+}
+
+html, body {
+    background-color: lightblue;
+}
+  
+mat-form-field {
+    background-color: white;
+    color: #020C18;
+    margin-bottom: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+}
+
+textarea {
+    width: 80%;
+    height: 110px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.input-group {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    font-size: 14px;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+}
+
+th {
+    vertical-align: middle;
+    font-weight: normal;
+}
+
+.left1 {
+    float: left;
+    width: 60%;
+    height: 110px;
+}
+
+.right1 {
+    float: right;
+    width: 38%;
+    height: 82px;
+}
+
+.left2 {
+    float: left;
+    width: 60%;
+    height: 110px;
+}
+
+.right2 {
+    float: right;
+    width: 38%;
+    height: 82px;
+}
+
+.firstDate {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.secondDate {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hint {
+    font-size: 12px;
+    text-align: left;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+mat-calendar {
+    background-color: white;
+    color: #020C18;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+
+}
+
+.leftSide {
+    width: 70%;
+    float: left;
+}
+
+.rightSide {
+    width: 28%;
+    float: right;
+}
+
+.newAndCalendar {
+    height: 550px;
+}
+
+b {
+    text-decoration: underline;
+}
+
+.item-group {
+    width: 35%;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.input-group {
+    width: 35%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h2 {
+    padding-top: 25px;
+}
+
+.text-success {
+    float: left;
+    padding-right: 5px;
+    padding-top: 4px;
+}
+
+.fa {
+    padding-left: 5px;
+}
+
+.collection-item {
+    padding-left: 1px;
+    font-weight: normal;
+}
+
+.updateInput {
+    font-size: 14px;
+    margin-top: 10px;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.updateTextarea {
+    height: auto;
+    width: 80%;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.updateDatearea {
+    width: 15%;
+    height: auto;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+
+strong {
+    text-decoration: underline;
+}
+
+#submit {
+    background-color: #3f51b5;
+    width: auto;
+    height: 32px;
+    border: medium solid #262C7B;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#x {
+    margin-top: 12px;
+}

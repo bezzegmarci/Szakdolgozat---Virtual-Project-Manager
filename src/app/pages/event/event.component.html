@@ -1,0 +1,166 @@
+<style>
+    @keyframes feliratlebeges {
+        from { left: -2%; }
+        to { left: 86%; }
+    }
+    .logo {
+        width: 205px;
+        height: 80px;
+        border-radius: 20px;
+        position: relative;
+        text-align: center;
+        animation-name: feliratlebeges;
+        animation-duration: 25s;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+    }
+    
+</style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<header>
+<img src = "assets/logo.png" alt = "logo" title="logo" class="logo" />
+</header>
+<body>
+<section>
+<blockquote>
+<div>
+    <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+        <li id="menu"><a routerLink="/todopage">Teendők</a></li>
+        <li id="menu"><a routerLink="/event">Események</a></li>
+        <li id="menu"><a routerLink="/notes">Jegyzetek</a></li>
+    </ul>
+</div>
+<div class="newAndCalendar">
+<div class="leftSide">
+<h2>Új esemény hozzáadása</h2>
+
+    <li>
+        <div class="input-group">
+        <input type="text" class="form-control border-0 py-3 shadow-none" placeholder="* Esemény megnevezése" #eventTitle>
+            <button class="btn text-success border-0" (click)="onClick(eventTitle, startDate, startTime, endDate, endTime, eventText)" >
+                <i class="fa-solid fa-circle-plus fa-xl"></i>
+            </button>
+        </div>
+        <div class="firstDate">
+            <div>
+            <mat-form-field appearance="fill" class="left1">
+                  <mat-label>* Add meg a kezdés dátumát!</mat-label>
+                <th>
+                  <input matInput [matDatepicker]="picker" #startDate>
+                </th>
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                <th>
+                  <mat-datepicker-toggle class="float-end text-secondary" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                </th>
+                <mat-datepicker #picker ></mat-datepicker>
+            </mat-form-field>
+            </div>
+            <div>
+            <mat-form-field appearance="fill" class="right1">
+                <mat-label>* Add meg a kedzés időpontját!</mat-label>
+                <input matTimepicker #t1="matTimepicker" #time1="ngModel" [minDate]="minValue" [maxDate]="maxValue"
+                    id="timepicker-example-3" mode="24h" ngModel placeholder="Kérlek válassz időt..." name="time-1"
+                    [disableDialogOpenOnClick]="true" #startTime>
+                <mat-icon matSuffix (click)="t1.showDialog()">access_time</mat-icon>
+                <mat-error *ngIf="time1.touched && time1.invalid">Helytelen időpont</mat-error>
+                <mat-hint>HH:MM</mat-hint>
+            </mat-form-field>
+            </div>
+        </div>
+        <div class="secondDate">
+            <div>
+            <mat-form-field appearance="fill" class="left2">
+                <mat-label>* Add meg a befejezés dátumát!</mat-label>
+                <th>
+                <input matInput [matDatepicker]="picker2" #endDate>
+                </th>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <th>
+                    <mat-datepicker-toggle class="float-end text-secondary" matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                </th>
+                <mat-datepicker #picker2 ></mat-datepicker>
+            </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill" class="right2">
+                    <mat-label>* Add meg a befejezés időpontját!</mat-label>
+                    <input matTimepicker #t2="matTimepicker" #time2="ngModel" [minDate]="minValue" [maxDate]="maxValue"
+                        id="timepicker-example-2" mode="24h" ngModel name="time-2"
+                        [disableDialogOpenOnClick]="true" #endTime>
+                    <mat-icon matSuffix (click)="t2.showDialog()">access_time</mat-icon>
+                    <mat-error *ngIf="time2.touched && time2.invalid">Helytelen idópont</mat-error>
+                    <mat-hint>HH:MM</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <textarea rows="5" cols="20" placeholder="Esemény leírása" #eventText></textarea>
+        <div class="hint">
+            <p>* Kötelezően kitöltendő!</p>
+        </div>
+    </li>
+</div>
+<div class="rightSide">
+<h2>Naptár</h2>
+    <mat-calendar>
+    </mat-calendar>
+</div>
+</div>
+<div>
+
+<h2>Eseményeim</h2>
+
+<table>
+    <tr>
+        <th>
+            <ul id="event" *ngFor="let item of events">
+                <li class="collection-item"><strong>{{item.title}}: </strong> 
+                    <a href="event#" class="secondary-content float-end"><i (click)="editEvent($event, item)" class="fa fa-pencil"></i></a>
+
+                    <br/>
+                    {{item.startDate}}
+                    {{item.startTime}} -  
+                    {{item.endDate}}  
+                    {{item.endTime}}-ig
+                    <br/> 
+                    {{item.text}} 
+
+        
+                    <div *ngIf="editState && eventToEdit.id == item.id">
+                        <form (ngSubmit)="updateEvent(item)">
+                            <div>
+                                <div class="input-field col s6">
+                                    <input class="updateInput" type="text" placeholder="Esemény megnevezése" [(ngModel)]="item.title" name="title">
+                                    <a href="event" *ngIf="editState && eventToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input class="updateDatearea" type="text" placeholder="Esemény kezdő dátuma" [(ngModel)]="item.startDate" name="startDate">
+                                </div>
+                                <div class="input-field col s6">
+                                    <input class="updateDatearea" type="text" placeholder="Esemény kezdő időpontja" [(ngModel)]="item.startTime" name="startTime">
+                                </div>
+                                <div class="input-field col s6">
+                                    <input class="updateDatearea" type="text" placeholder="Esemény befejező dátuma" [(ngModel)]="item.endDate" name="endDate">
+                                </div>
+                                <div class="input-field col s6">
+                                    <input class="updateDatearea" type="text" placeholder="Esemény befejező időpontja" [(ngModel)]="item.endTime" name="endTime">
+                                </div>
+                                <div class="input-field col s6">
+                                    <textarea class="updateTextarea" type="text" placeholder="Esemény leírása" [(ngModel)]="item.text" name="text"></textarea>
+                                </div>
+                                <input id="submit" type="submit" value="Módosítás">
+                                <button id="submit" (click)="deleteEvent($event, item)">Törlés</button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </th>
+    </tr>
+</table>
+</div>
+</blockquote>
+</section>
+</body>

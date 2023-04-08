@@ -1,11 +1,15 @@
-select {
-    background-color:blue;
-    font-size: 14px;
-    color:antiquewhite;
-    font-weight: bold;
-    text-align: center;
-    font-family: cursive;
-    border-radius: 12px;
-    border-color:darkblue;
-    border-width: 5px;
+a {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active {
+    color: black;
+}
+
+mat-nav-list{
+    background-color: dodgerblue;
+    padding-bottom: height;
+    height: 100%;
 }

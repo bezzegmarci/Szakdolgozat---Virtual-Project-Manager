@@ -1,0 +1,88 @@
+<style>
+    @keyframes feliratlebeges {
+        from { left: -2%; }
+        to { left: 86%; }
+    }
+    .logo {
+        width: 205px;
+        height: 80px;
+        border-radius: 20px;
+        position: relative;
+        text-align: center;
+        animation-name: feliratlebeges;
+        animation-duration: 25s;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+    }
+    
+</style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<header>
+<img src = "assets/logo.png" alt = "logo" title="logo" class="logo" />
+</header>
+<body>
+<section>
+<blockquote>
+<div>
+    <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+        <li id="menu"><a routerLink="/todopage">Teendők</a></li>
+        <li id="menu"><a routerLink="/event">Események</a></li>
+        <li id="menu"><a routerLink="/notes">Jegyzetek</a></li>
+    </ul>
+</div>
+
+<h2>Új jegyzet hozzáadása</h2>
+
+
+    <li>
+        <div class="input-group">
+        <input type="text" class="form-control border-0 py-3 shadow-none" placeholder="* Jegyzet neve" #notesTitle>
+            <button class="btn text-success border-0" (click)="onClick(notesTitle, notesText)">
+                <i class="fa-solid fa-circle-plus fa-xl"></i>
+            </button>
+        </div>
+        <textarea matInput rows="5" cols="40" placeholder="* Szöveg" #notesText></textarea>
+        <div class="hint">
+            <p>* Kötelezően kitöltendő!</p>
+        </div>
+    </li>
+
+<h2>Jegyzeteim</h2>
+
+<table>
+    <tr>
+        <th>
+            <ul id="notesTitle" *ngFor="let item of notes">
+                <li class="collection-item"><strong>{{item.title}}: </strong> 
+                    <a href="notes#" class="secondary-content float-end"><i (click)="editNote($event, item)" class="fa fa-pencil"></i></a>
+
+                    <br/>
+                    {{item.text}} 
+        
+                    <div *ngIf="editState && noteToEdit.id == item.id">
+                        <form (ngSubmit)="updateNote(item)">
+                            <div>
+                                <div class="input-field col s6">
+                                    <input class="updateInput" type="text" placeholder="Jegyzet neve" [(ngModel)]="item.title" name="title">
+                                    <a href="notes" *ngIf="editState && noteToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>
+                                </div>
+                                <div class="input-field col s6">
+                                    <textarea class="updateTextarea" type="text" placeholder="Jegyzet szövege" [(ngModel)]="item.text" name="text"></textarea>
+                                </div>
+                                <input id="submit" type="submit" value="Módosítás">
+                                <button id="submit" (click)="deleteNote($event, item)">Törlés</button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </th>
+    </tr>
+</table>
+
+</blockquote>
+</section>
+</body>

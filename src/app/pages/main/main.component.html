@@ -1,62 +1,103 @@
-<div>
+<style>
+        @keyframes feliratlebeges {
+            from { left: -1%; }
+            to { left: 84%; }
+        }
+        .logo {
+            width: 205px;
+            height: 80px;
+            border-radius: 20px;
+            position: relative;
+            text-align: center;
+            animation-name: feliratlebeges;
+            animation-duration: 25s;
+            animation-delay: 0s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: linear;
+            margin-top: -3.5px;
+        }
+        
+</style>
+<html>
+
+<body>
+
+<section>
+    <div class="first">
+        <img src = "assets/topimg.jpg" alt = "asideimg" title="asideimg" class="asideimg" />
+    </div>
+
     <h1>Üdvözöl a Virtual Project Manager!</h1>
-</div>
-<div>
-    <p> 
-        Itt egy új lehetőség kis-és középvállalatok számára.
-    <br/>A cég projektmenedzsmenttel kapcsolatos feladatainak 
-        végrehajtására könnyen és átláthatóan, mely lecsökkenti 
-        az ilyen jellegű papíros ügyintézések időtartamát.
-    <br/>Próbálja ki teljesen <b>ingyen!</b>
-    </p>
-</div>
-<div>
-    <h3>Fedezd fel az alkalmazásban rejlő lehetőségetek</h3>
-    <table>
-        <tr>
-            Információk megosztása
-            <td>
-                Ha mindenki érti a projektcélokat, könnyebb a résztvevők irányítása, 
-                a megfelelő, ezen kívül effektív munkavégzés biztosítása. 
-                Nem pusztán a „megértés”, hanem az konszenzus is releváns. 
-                Ha mindenki akceptálja a projektcélokat, a későbbi konfliktushelyzetek 
-                megfelelő szegmense eleve kiküszöbölhető.
-            </td>
-        </tr>
-        <br/>
-        <tr>
-            Könnyű kezelés
-            <td>
-                Átlátható kezelőfelület, egyszerű műveletek, gyors megértés.
-            </td>
-        </tr>
-        <br/>
-        <tr>
-            Feladatok, Mérföldkövek
-            <td>
-                Feladatainkan, teendőinket mérföldkövekbe rendezhetjük, 
-                a nagyobb átláthatóság, könnyebb követés érdekében.
-                Ezek lezárására, újranyitásásra, archiválására is lehetőség nyílik.
-            </td>
-        </tr>
+    
+    <div>
+        <p> 
+            Itt egy új lehetőség jegyzeteid, teendőid, eseményeid tárolására.
+        <br/>A projektmenedzsmenttel kapcsolatos feladatai
+            végrehajtása könnyen és átláthatóan, <br/>mely lecsökkenti 
+            az ilyen jellegű papíros ügyintézések időtartamát és a feleslegesen felhasznált papír mennyiségét.
+        <br/>Próbálja ki teljesen <b>ingyen!</b>
+        </p>
+    </div>
+    <div>
+        <h3>Fedezd fel az alkalmazásban rejlő lehetőségeket!</h3>
+        <table>
+            <tr>
+                Információk tárolása
+                <td>
+                    Rengeteg információ tárolására nyíilik lehtőség a "felhőben", informatikai
+                    rendszerek segítségével, sok felhasznált papír helyett
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                Könnyű kezelés
+                <td>
+                    Átlátható kezelőfelület, egyszerű műveletek, gyors megértés
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                Feladatok, teendők
+                <td>
+                    Teendőit, feladatit, 3 csoportba rendezheti, ezáltal átláthatóbbá, követhetőbbé válnak
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                Események
+                <td>
+                    Közelgő eseményeinek rögzítése, leírással, kezdés és a befejezés dátumával
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                Jegyzetek
+                <td>
+                    Legfontosabb jegyzetei, tételei, fontos információi könnyedén, egy helyen tárolása
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <div class="registrationForm">
+        <h2>Felkeltette érdeklődését termékünk? Kattintson a gombra és regiszráljon!</h2>
+        <button mat-raised-button color="primary" class="registration" routerLink="/signin">Regisztrálok</button>
+    </div>
+    <table class="img-flex">
+        <td class="nopadding">
+            <img id="main_img1" src="assets/main_page1.jpg" alt="main_img1">
+        </td>
+        <td class="nopadding">
+        <img id="main_img2" src="assets/main_page2.jpg" alt="main_img2">
+        </td>
     </table>
-</div>
-<br/>
-<div>
-    <form class="registrationForm">
-            <label>E-mail cím: </label>
-            <input class="email" type="email" required>
-            <input class="registration"type="submit" value="Regisztrálok!">
-    </form>
-</div>
-<table class="img_table">
-    <td>
-        <img id="main_img1" src="assets/main_page1.jpg" alt="main_img1">
-    </td>
-    <td>
-    <img id="main_img3" src="assets/main_page3.jpg" alt="main_img3">
-    </td>
-    <td>
-    <img id="main_img2" src="assets/main_page2.jpg" alt="main_img2">
-    </td>
-</table>
+    
+</section>
+</body>
+<footer>
+    <img src = "assets/logo.png" alt = "logo" title="logo" class="logo" />
+</footer>
+</html>
+
+

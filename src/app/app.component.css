@@ -1,7 +1,53 @@
 .main_component {
-    height: 100vh;
+    height: 100%;
 }
 
 .contact_component {
-    height: 100vh;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active {
+    color: black;
+}
+
+.navigation-items {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+div {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+mat-toolbar {
+    height: auto;
+    width: auto;
+}
+
+html, body { 
+    height: 100%; 
+    background-color: lightblue;
+}
+
+.logoutIcon {
+    font-size: 15px;
+    padding-top: 11px;
+    padding-left: 2px;
+}
+
+.emailText {
+    text-decoration: underline;
+    font-style: oblique;
+    color: #020C18;
+}
+
+.emailText:hover, .emailText:active {
+    color: white;
 }

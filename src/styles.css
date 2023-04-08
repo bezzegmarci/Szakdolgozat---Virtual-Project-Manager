@@ -1,6 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+/* angular-cli file: src/styles.css */
 
-html {
-    background-image: url(assets/background.png); 
-    background-position: center;
+html, body { 
+    height: 100%; 
+    background-color: lightblue;
 }
+
+body { margin: 0; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
+
+mat-icon {
+    margin-right: 5px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

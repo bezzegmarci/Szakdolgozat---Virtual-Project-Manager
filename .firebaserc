@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "virtual-project-manager-f12ca": {
+      "hosting": {
+        "szakdolgozat": [
+          "virtual-project-manager-f12ca"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "virtual-project-manager-f12ca"
+  }
+}

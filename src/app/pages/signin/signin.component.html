@@ -1,0 +1,19 @@
+<body>
+<div class="nostyle"></div>
+<mat-card class="div-flex">
+<div>
+    <h1>Regisztráció a Virtual Project Manager használatához!</h1>
+    <mat-form-field><mat-label for="email">* Email: </mat-label><input matInput type="email" [formControl]="email"/></mat-form-field>
+    <mat-form-field><mat-label for="password">* Jelszó: </mat-label><input matInput type="password" [formControl]="password"/></mat-form-field>
+    <mat-form-field><mat-label for="firstname">Vezetéknév: </mat-label><input matInput type="text" [formControl]="firstname"/></mat-form-field>
+    <mat-form-field><mat-label for="lastname">Keresztnév: </mat-label><input matInput type="text" [formControl]="lastname"/></mat-form-field>
+    <p>* Kötelezően kitöltendő!</p>
+    <span>
+        <button mat-raised-button color="primary" (click)="onSubmit()">Regisztráció</button>
+        <button mat-raised-button color="primary" (click)="goBack()">Vissza</button>
+    </span>
+</div>
+</mat-card>
+<img src = "assets/logo.png" alt = "logo" title="logo" class="logo" />
+<footer></footer>
+</body>
