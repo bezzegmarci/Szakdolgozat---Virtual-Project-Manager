@@ -1,16 +1,11 @@
 table {
     justify-content: center;
     text-align: left;
-    width: 100%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid;
-    border-radius: 4px;
-    border-color: darkblue;
-    padding: 5px;
-    
+    font-size: 16px;
 }
-
 
 header {
     background-color: lightblue;
@@ -75,8 +70,8 @@ a:hover, a:active {
 
 li {
     display: inline;
-    float: left;
-    padding-bottom: 5px;
+    text-align: left;
+    font-weight: lighter;
 }
 
 #menu {
@@ -116,7 +111,7 @@ ul {
 }
 
 .item-group {
-    width: 35%;
+    width: 40%;
     margin-right: auto;
     margin-left: auto;
     font-size: 16px;
@@ -124,7 +119,7 @@ ul {
 }
 
 .input-group {
-    width: 35%;
+    width: 40%;
     margin-right: auto;
     margin-left: auto;
 }
@@ -135,8 +130,8 @@ h2 {
 
 .text-success {
     float: left;
-    padding-right: 5px;
-    padding-top: 4px;
+    margin-right: 5px;
+    margin-top: 4px;
 }
 
 .fa {
@@ -156,3 +151,16 @@ h2 {
     margin-top: 12px;
 }
 
+th {
+    vertical-align: middle;
+    font-weight: normal;
+}
+
+h4, h5 {
+    font-style: oblique;
+    color: blue;
+}
+
+h4 {
+    text-decoration: underline;
+}

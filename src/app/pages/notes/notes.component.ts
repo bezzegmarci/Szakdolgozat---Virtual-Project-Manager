@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Note } from 'src/app/shared/models/Note';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotesService } from 'src/app/shared/services/notes.service';
 
 @Component({
@@ -9,20 +11,29 @@ import { NotesService } from 'src/app/shared/services/notes.service';
 })
 export class NotesComponent implements OnInit {
 
-  notes: Note[];
+  notes$: Observable<Note[]>;
+
+  notes: Note[] = [];
   editState: boolean = false;
   noteToEdit: Note;
 
   constructor(
-    private notesService: NotesService
+    private notesService: NotesService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.notesService.getNotes().subscribe(notes => {
-      //console.log(notes);
-      this.notes = notes;
-    });
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.notes$ = this.notesService.getNotesByUserId(JSON.parse(currentUser).uid);
+    } else {
+      this.authService.getCurrentUser().then(user => {
+        this.notes$ = this.notesService.getNotesByUserId(user.uid);
+        this.authService.setCurrentUser(user);
+      });
+    }
   }
+  
 
   deleteNote(event, note: Note){
     this.clearState();

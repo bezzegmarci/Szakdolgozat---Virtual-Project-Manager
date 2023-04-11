@@ -1,7 +1,9 @@
 import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
 import { Doing } from 'src/app/shared/models/Doing';
 import { Done } from 'src/app/shared/models/Done';
 import { Todo } from 'src/app/shared/models/Todo';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { TodoService } from 'src/app/shared/services/to-do-page.service';
 
 @Component({
@@ -11,35 +13,54 @@ import { TodoService } from 'src/app/shared/services/to-do-page.service';
 })
 export class ToDoPageComponent implements OnInit {
 
-  todos: Todo[];
+  todos$: Observable<Todo[]>;
+  doings$: Observable<Doing[]>;
+  dones$: Observable<Done[]>;
+
+  todos: Todo[] = [];
   editState: boolean = false;
   todoToEdit: Todo;
 
-  doings: Doing[];
+  doings: Doing[] = [];
   editState2: boolean = false;
   doingToEdit: Doing;
 
-  dones: Done[];
+  dones: Done[] = [];
   editState3: boolean = false;
   doneToEdit: Done;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.todoService.getTodos().subscribe(todos => {
-      //console.log(todos);
-      this.todos = todos;
-    });
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.todos$ = this.todoService.getTodosByUserId(JSON.parse(currentUser).uid);
+    } else {
+      this.authService.getCurrentUser().then(user => {
+        this.todos$ = this.todoService.getTodosByUserId(user.uid);
+        this.authService.setCurrentUser(user);
+        console.log(this.todos$);
+      });
+    }
 
-    this.todoService.getDoings().subscribe(doings => {
-      //console.log(doings);
-      this.doings = doings;
-    });
+    if (currentUser) {
+      this.doings$ = this.todoService.getDoingsByUserId(JSON.parse(currentUser).uid);
+    } else {
+      this.authService.getCurrentUser().then(user => {
+        this.doings$ = this.todoService.getDoingsByUserId(user.uid);
+        this.authService.setCurrentUser(user);
+      });
+    }
 
-    this.todoService.getDones().subscribe(dones => {
-      //console.log(dones);
-      this.dones = dones;
-    });
+    if (currentUser) {
+      this.dones$ = this.todoService.getDonesByUserId(JSON.parse(currentUser).uid);
+    } else {
+      this.authService.getCurrentUser().then(user => {
+        this.dones$ = this.todoService.getDonesByUserId(user.uid);
+        this.authService.setCurrentUser(user);
+      });
+    }
+
   }
 
   deleteTodo(event, todo: Todo){
@@ -136,6 +157,7 @@ export class ToDoPageComponent implements OnInit {
     if (titleInput.value) {
       this.todoService.addTodo(titleInput.value);
       titleInput.value = "";
+      console.log(this.todos$);
     }
   }
 

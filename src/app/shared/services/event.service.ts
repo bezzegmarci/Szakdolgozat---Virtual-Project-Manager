@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore'
 import { Observable, map } from 'rxjs';
 import { Event } from '../models/Event';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class EventService {
   Events: Observable<Event[]>;
   eventDoc: AngularFirestoreDocument<Event>;
 
-  constructor(public afs: AngularFirestore) { 
+  constructor(public afs: AngularFirestore, private authService: AuthService) { 
     
     this.eventCollection = this.afs.collection('Events', ref => ref.orderBy('title','asc'));
 
@@ -32,14 +33,20 @@ export class EventService {
     return this.Events;
   }
 
-  addEvent(title: string, startDate: string, startTime: string, endDate: string, endTime: string, text: string){
-    this.eventCollection.add({
+  getEventsByUserId(uid: string) {
+    return this.afs.collection('Events', ref => ref.where('userId', '==', uid)).valueChanges({ idField: 'id' });
+  }
+
+  async addEvent(title: string, startDate: string, startTime: string, endDate: string, endTime: string, text: string){
+    const user = await this.authService.getCurrentUser(); // Az éppen bejelentkezett felhasználó lekérése
+    await this.eventCollection.add({
       title,
       startDate,
       startTime,
       endDate,
       endTime,
-      text
+      text,
+      userId: user.uid // Az éppen bejelentkezett felhasználó azonosítójának hozzáadása az adatbázisban tárolt jegyzetekhez
     })
   }
 

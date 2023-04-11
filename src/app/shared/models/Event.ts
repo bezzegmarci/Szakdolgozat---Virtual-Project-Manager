@@ -6,4 +6,5 @@ export interface Event {
     startTime?: string;
     text?: string;
     title?: string;
+    userId?: string;
 }

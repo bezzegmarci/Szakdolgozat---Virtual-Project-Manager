@@ -41,10 +41,22 @@ export class SigninComponent implements OnInit {
         this.router.navigateByUrl('/main');
       }).catch(error => {
         console.log(error);
+        if(error == "FirebaseError: Firebase: Error (auth/invalid-email)."){
+          alert('Nem megfelelő email!');
+        } 
+        if(error == "FirebaseError: Firebase: Error (auth/internal-error)"){
+          alert('Nem megfelelő email!');
+        } 
+        if(error == "FirebaseError: Firebase: Password should be at least 6 characters (auth/weak-password)."){
+          alert('Nem megfelelő jelszó! (Minimum 6 karakter)');
+        } 
       })
     }).catch(error => {
       console.error(error);
       if(error == "FirebaseError: Firebase: Error (auth/invalid-email)."){
+        alert('Nem megfelelő email!');
+      } 
+      if(error == "FirebaseError: Firebase: Error (auth/internal-error)"){
         alert('Nem megfelelő email!');
       } 
       if(error == "FirebaseError: Firebase: Password should be at least 6 characters (auth/weak-password)."){

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
         this.page = currentPage;
       }
   }); 
-  this.authService.isUserLoggedIn().subscribe(user => {
+  this.authService.isUserLoggedIn2().subscribe(user => {
     this.loggedInUser = user;
   }, error => {
     console.error(error);

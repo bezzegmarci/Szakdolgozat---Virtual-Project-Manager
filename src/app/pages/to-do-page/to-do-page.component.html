@@ -35,6 +35,11 @@
 </div>
 
 <div>
+<h4>Használati utasítás: </h4>
+<h5>A zöld kör "kipipálásával" a teendő átkerül az alatta lévő tevékenység típusba.</h5>
+</div>
+
+<div>
     <h2>Elvégzendő tevékenységek</h2>
 </div>
 
@@ -46,33 +51,41 @@
     </button>
 </div>
 
-<div class="item-group" *ngIf="todos?.length > 0;else noTodos">
-    <ul *ngFor="let item of todos" class="collection">
-        <li class="collection-item"><strong>{{item.title}} </strong> 
-            <i class="text-success" (click)="onStatusChange(item,!item.isDone)"
-            [ngClass]="item.isDone?'fa-solid fa-circle-check':'fa-regular fa-circle'"></i>
-            <a href="todopage#" class="secondary-content float-end"><i (click)="editTodo($event, item)" class="fa fa-pencil"></i></a>
+<table>
+    <tr>
+        <th *ngIf="(todos$ | async)?.length > 0 ;else noItems">       
+             <ul *ngFor="let item of todos$ | async" class="collection">
+                <li>
+                    <i class="text-success" (click)="onStatusChange(item,!item.isDone)"
+                        [ngClass]="item.isDone?'fa-solid fa-circle-check':'fa-regular fa-circle'"></i>
+                </li>
+                    <li class="collection-item"><strong>{{item.title}} </strong> 
+                        
+                        <a href="todopage#" class="secondary-content float-end"><i (click)="editTodo($event, item)" class="fa fa-pencil"></i></a>
 
-            <div *ngIf="editState && todoToEdit.id == item.id">
-                <form (ngSubmit)="updateTodo(item)">
-                    <div>
-                        <div class="input-field col s6">
-                            <input class="updateInput" type="text" placeholder="Tevékenység neve" [(ngModel)]="item.title" name="title">
-                            <a href="todopage" *ngIf="editState && todoToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>
+                        <div *ngIf="editState && todoToEdit.id == item.id">
+                            <form (ngSubmit)="updateTodo(item)">
+                                <div>
+                                    <div class="input-field col s6">
+                                        <input class="updateInput" type="text" placeholder="Tevékenység neve" [(ngModel)]="item.title" name="title">
+                                        <a href="todopage" *ngIf="editState && todoToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>
+                                    </div>
+                                    <input id="submit" type="submit" value="Módosítás">
+                                    <button id="submit" (click)="deleteTodo($event, item)">Törlés</button>
+                                </div>
+                            </form>
                         </div>
-                        <input id="submit" type="submit" value="Módosítás">
-                        <button id="submit" (click)="deleteTodo($event, item)">Törlés</button>
-                    </div>
-                </form>
-            </div>
-        </li>
-    </ul>
-</div>
+                    </li>
+             </ul>
+        </th>
+    </tr>
+</table>
 
-<ng-template #noTodos>
+<ng-template #noItems>
     <hr>
-    <h5>Nincsenek elvégzendő tevékenységek</h5>
+    <h5>Nincs ilyen tevékenység! <br/>Adj hozzá egyet!</h5>
 </ng-template>
+
 
 <div>
     <h2>Folyamatban lévő tevékenységek</h2>
@@ -86,33 +99,34 @@
     </button>
 </div>
 
-<div class="item-group" *ngIf="doings?.length > 0;else noDoing">
-    <ul *ngFor="let item of doings" class="collection">
-        <li class="collection-item"><strong>{{item.title}} </strong> 
-            <i class="text-success" (click)="onStatusChange2(item,!item.isDone)"
-            [ngClass]="item.isDone?'fa-solid fa-circle-check':'fa-regular fa-circle'"></i>
-            <a href="todopage#" class="secondary-content"><i (click)="editDoing($event, item)" class="fa fa-pencil"></i></a>
+<table>
+    <tr>
+        <th *ngIf="(doings$ | async)?.length > 0 ;else noItems">
+            <ul *ngFor="let item of doings$ | async" class="collection">
+                <li>
+                    <i class="text-success" (click)="onStatusChange2(item,!item.isDone)"
+                        [ngClass]="item.isDone?'fa-solid fa-circle-check':'fa-regular fa-circle'"></i>
+                </li>
+                <li class="collection-item"><strong>{{item.title}} </strong> 
+                    <a href="todopage#" class="secondary-content float-end"><i (click)="editDoing($event, item)" class="fa fa-pencil"></i></a>
 
-            <div *ngIf="editState2 && doingToEdit.id == item.id">
-                <form (ngSubmit)="updateDoing(item)">
-                    <div>
-                        <div class="input-field col s6">
-                            <input class="updateInput" type="text" placeholder="Tevékenység neve" [(ngModel)]="item.title" name="title">
-                            <a href="todopage" *ngIf="editState2 && doingToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>  
-                        </div>
-                        <input id="submit" type="submit" value="Módosítás">
-                        <button id="submit" (click)="deleteDoing($event, item)">Törlés</button>
+                    <div *ngIf="editState2 && doingToEdit.id == item.id">
+                        <form (ngSubmit)="updateDoing(item)">
+                            <div>
+                                <div class="input-field col s6">
+                                    <input class="updateInput" type="text" placeholder="Tevékenység neve" [(ngModel)]="item.title" name="title">
+                                    <a href="todopage" *ngIf="editState2 && doingToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>  
+                                </div>
+                                <input id="submit" type="submit" value="Módosítás">
+                                <button id="submit" (click)="deleteDoing($event, item)">Törlés</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-        </li>
-    </ul>
-</div>
-
-<ng-template #noDoing>
-    <hr>
-    <h5>Nincsenek folyamatban lévő tevékenységek</h5>
-</ng-template>
+                </li>
+            </ul>
+        </th>
+    </tr>
+</table>
 
 <div>
     <h2>Befejezett tevékenységek</h2>
@@ -126,31 +140,30 @@
     </button>
 </div>
 
-<div class="item-group" *ngIf="dones?.length > 0;else noDone">
-    <ul *ngFor="let item of dones" class="collection">
-        <li class="collection-item"><strong>{{item.title}} </strong> 
-            <a href="todopage#" class="secondary-content"><i (click)="editDone($event, item)" class="fa fa-pencil"></i></a>
-        
-            <div *ngIf="editState3 && doneToEdit.id == item.id">
-                <form (ngSubmit)="updateDone(item)">
-                    <div>
-                        <div class="input-field col s6">
-                            <input class="updateInput" type="text" placeholder="Tevékenység neve" [(ngModel)]="item.title" name="title">
-                            <a href="todopage" *ngIf="editState3 && doneToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>  
-                        </div>
-                        <input id="submit" type="submit" value="Módosítás">
-                        <button id="submit" (click)="deleteDone($event, item)">Törlés</button>
+<table>
+    <tr>
+        <th *ngIf="(dones$ | async)?.length > 0 ;else noItems">
+            <ul *ngFor="let item of dones$ | async" class="collection">
+                <li class="collection-item"><strong>{{item.title}} </strong> 
+                    <a href="todopage#" class="secondary-content float-end"><i (click)="editDone($event, item)" class="fa fa-pencil"></i></a>
+                
+                    <div *ngIf="editState3 && doneToEdit.id == item.id">
+                        <form (ngSubmit)="updateDone(item)">
+                            <div>
+                                <div class="input-field col s6">
+                                    <input class="updateInput" type="text" placeholder="Tevékenység neve" [(ngModel)]="item.title" name="title">
+                                    <a href="todopage" *ngIf="editState3 && doneToEdit.id == item.id" (click)="clearState()" id="x" class="fa fa-times-circle float-end"></a>  
+                                </div>
+                                <input id="submit" type="submit" value="Módosítás">
+                                <button id="submit" (click)="deleteDone($event, item)">Törlés</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-        </li>
-    </ul>
-</div>
-
-<ng-template #noDone>
-    <hr>
-    <h5>Nincsenek befejezett tevékenységek</h5>
-</ng-template>
+                </li>
+            </ul>
+        </th>
+    </tr>
+</table>
 
 </blockquote>
 </section>

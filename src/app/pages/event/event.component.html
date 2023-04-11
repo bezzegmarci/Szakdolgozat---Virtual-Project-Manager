@@ -114,8 +114,8 @@
 
 <table>
     <tr>
-        <th>
-            <ul id="event" *ngFor="let item of events">
+        <th *ngIf="(events$ | async)?.length > 0 ;else noItems">
+            <ul id="event" *ngFor="let item of events$ | async">
                 <li class="collection-item"><strong>{{item.title}}: </strong> 
                     <a href="event#" class="secondary-content float-end"><i (click)="editEvent($event, item)" class="fa fa-pencil"></i></a>
 
@@ -160,6 +160,11 @@
         </th>
     </tr>
 </table>
+
+<ng-template #noItems>
+    <hr>
+    <h5>Nincs még mentett eseményed! <br/>Adj hozzá egyet!</h5>
+</ng-template>
 </div>
 </blockquote>
 </section>

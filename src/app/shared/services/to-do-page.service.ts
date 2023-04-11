@@ -4,6 +4,7 @@ import { Todo } from '../models/Todo';
 import { Observable, map } from 'rxjs';
 import { Doing } from '../models/Doing';
 import { Done } from '../models/Done';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class TodoService {
   Dones: Observable<Done[]>;
   doneDoc: AngularFirestoreDocument<Done>;
 
-  constructor(public afs: AngularFirestore) { 
+  constructor(public afs: AngularFirestore, private authService: AuthService) { 
 
     this.todoCollection = this.afs.collection('Todos', ref => ref.orderBy('title','asc'));
     this.doingCollection = this.afs.collection('Doings', ref => ref.orderBy('title','asc'));
@@ -68,25 +69,43 @@ export class TodoService {
     return this.Dones;
   }
 
-  addTodo(title: string){
-    this.todoCollection.add({
+  async addTodo(title: string){
+    const user = await this.authService.getCurrentUser(); // Az éppen bejelentkezett felhasználó lekérése
+    await this.todoCollection.add({
       title,
-      isDone : false
+      isDone : false,
+      userId: user.uid // Az éppen bejelentkezett felhasználó azonosítójának hozzáadása az adatbázisban tárolt jegyzetekhez
     })
   }
 
-  addDoing(title: string){
+  async addDoing(title: string){
+    const user = await this.authService.getCurrentUser(); // Az éppen bejelentkezett felhasználó lekérése
     this.doingCollection.add({
       title,
-      isDone : false
+      isDone : false,
+      userId: user.uid // Az éppen bejelentkezett felhasználó azonosítójának hozzáadása az adatbázisban tárolt jegyzetekhez
     })
   }
 
-  addDone(title: string){
+  async addDone(title: string){
+    const user = await this.authService.getCurrentUser(); // Az éppen bejelentkezett felhasználó lekérése
     this.doneCollection.add({
       title,
-      isDone : false
+      isDone : false,
+      userId: user.uid // Az éppen bejelentkezett felhasználó azonosítójának hozzáadása az adatbázisban tárolt jegyzetekhez
     })
+  }
+
+  getTodosByUserId(uid: string) {
+    return this.afs.collection('Todos', ref => ref.where('userId', '==', uid)).valueChanges({ idField: 'id' });
+  }
+
+  getDoingsByUserId(uid: string) {
+    return this.afs.collection('Doings', ref => ref.where('userId', '==', uid)).valueChanges({ idField: 'id' });
+  }
+
+  getDonesByUserId(uid: string) {
+    return this.afs.collection('Dones', ref => ref.where('userId', '==', uid)).valueChanges({ idField: 'id' });
   }
 
   deleteTodo(todo: Todo){

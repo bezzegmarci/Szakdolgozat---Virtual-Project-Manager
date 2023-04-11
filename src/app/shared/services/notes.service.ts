@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore'
 import { Note } from '../models/Note';
 import { Observable, map } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class NotesService {
   Notes: Observable<Note[]>;
   noteDoc: AngularFirestoreDocument<Note>;
 
-  constructor(public afs: AngularFirestore) { 
+  constructor(public afs: AngularFirestore, private authService: AuthService) { 
     
     this.noteCollection = this.afs.collection('Notes', ref => ref.orderBy('title','asc'));
 
@@ -27,14 +28,20 @@ export class NotesService {
 
    }
 
-  getNotes(){
+   getNotes(){
     return this.Notes;
   }
 
-  addNote(title: string, text: string){
-    this.noteCollection.add({
+  getNotesByUserId(uid: string) {
+    return this.afs.collection('Notes', ref => ref.where('userId', '==', uid)).valueChanges({ idField: 'id' });
+  }
+
+  async addNote(title: string, text: string){
+    const user = await this.authService.getCurrentUser(); // Az éppen bejelentkezett felhasználó lekérése
+    await this.noteCollection.add({
       title,
-      text
+      text,
+      userId: user.uid // Az éppen bejelentkezett felhasználó azonosítójának hozzáadása az adatbázisban tárolt jegyzetekhez
     })
   }
 

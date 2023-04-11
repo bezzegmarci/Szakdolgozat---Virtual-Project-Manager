@@ -54,8 +54,8 @@
 
 <table>
     <tr>
-        <th>
-            <ul id="notesTitle" *ngFor="let item of notes">
+        <th *ngIf="(notes$ | async)?.length > 0 ;else noItems">
+            <ul id="notesTitle" *ngFor="let item of notes$ | async">
                 <li class="collection-item"><strong>{{item.title}}: </strong> 
                     <a href="notes#" class="secondary-content float-end"><i (click)="editNote($event, item)" class="fa fa-pencil"></i></a>
 
@@ -82,6 +82,11 @@
         </th>
     </tr>
 </table>
+
+<ng-template #noItems>
+    <hr>
+    <h5>Nincs még mentett jegyzeted! <br/>Adj hozzá egyet!</h5>
+</ng-template>
 
 </blockquote>
 </section>

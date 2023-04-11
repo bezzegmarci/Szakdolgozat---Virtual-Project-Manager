@@ -281,3 +281,8 @@ strong {
 #x {
     margin-top: 12px;
 }
+
+h5 {
+    font-style: oblique;
+    color: blue;
+}

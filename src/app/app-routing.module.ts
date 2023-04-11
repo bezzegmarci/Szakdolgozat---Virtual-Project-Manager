@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
 {
@@ -20,15 +21,18 @@ const routes: Routes = [
 },
 {
   path: 'todopage',
-  loadChildren: () => import('./pages/to-do-page/to-do-page-routing.module').then(m => m.ToDoPageRoutingModule)
+  loadChildren: () => import('./pages/to-do-page/to-do-page-routing.module').then(m => m.ToDoPageRoutingModule),
+  canActivate: [AuthGuard]
 },
 {
   path: 'event',
-  loadChildren: () => import('./pages/event/event-routing.module').then(m => m.EventRoutingModule)
+  loadChildren: () => import('./pages/event/event-routing.module').then(m => m.EventRoutingModule),
+  canActivate: [AuthGuard]
 },
 {
   path: 'notes',
-  loadChildren: () => import('./pages/notes/notes-routing.module').then(m => m.NotesRoutingModule)
+  loadChildren: () => import('./pages/notes/notes-routing.module').then(m => m.NotesRoutingModule),
+  canActivate: [AuthGuard]
 },
 {
   path: '',
@@ -42,4 +46,9 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  
+}
+
+
+
